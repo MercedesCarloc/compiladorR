@@ -21,7 +21,7 @@ public class Parser
         this.tokens = tokens;
     }
 
-    // Método principal para iniciar el análisis
+    // Método principal para iniciar el analisis
     public void parse()
     {
         while (!estaEnElFinal())
@@ -30,7 +30,7 @@ public class Parser
         }
     }
 
-    // Método para procesar una declaración y ejecutar la acción
+    // Metodo para procesar una declaracion y ejecutar la accion
     private void ejecutarDeclaracion()
     {
         if (coincide(TipoToken.PRINT))
@@ -41,36 +41,31 @@ public class Parser
             ejecutarAsignacion();
         } else
         {
-            throw error("Se esperaba una declaración válida.");
+            throw error("Se esperaba una declaracion valida");
         }
     }
 
-    // Método para procesar y ejecutar una declaración "print"
+    // metodo para procesar y ejecutar una declaracion "print"
     private void ejecutarPrint()
     {
-        consumir(TipoToken.PARENTESIS_IZQUIERDO, "Se esperaba '(' después de 'print'.");
+        consumir(TipoToken.PARENTESIS_IZQUIERDO, "Se esperaba '(' despues de 'print'");
         Object valor = evaluarExpresion();
-        consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba ')' después de la expresión.");
-        consumir(TipoToken.PUNTO_Y_COMA, "Se esperaba ';' al final de la declaración.");
-
-        // Ejecutamos el comando print (imprimimos el valor)
+        consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba ')' despues de la expresion");
+        consumir(TipoToken.PUNTO_Y_COMA, "Se esperaba ';' al final de la declaracin.");
         System.out.println(valor);
     }
 
-    // Método para procesar y ejecutar una declaración de asignación
+    // Método para procesar y ejecutar una declaracin de asignación
     private void ejecutarAsignacion()
     {
         Token identificador = anterior();
         consumir(TipoToken.ASIGNACION, "Se esperaba '<-' después del identificador.");
         Object valor = evaluarExpresion();
         consumir(TipoToken.PUNTO_Y_COMA, "Se esperaba ';' al final de la declaración.");
-
-        // Aquí puedes agregar la lógica para almacenar la variable si lo necesitas
-        // Por ejemplo, en una tabla de símbolos
         System.out.println("Asignación: " + identificador.lexema + " = " + valor);
     }
 
-    // Método para evaluar una expresión
+    // Metodo para evaluar una expresion
     private Object evaluarExpresion()
     {
         Object izquierda = evaluarTermino();
@@ -85,18 +80,17 @@ public class Parser
         return izquierda;
     }
 
-    // Método para evaluar un término (números, variables, etc.)
+    // Metodo para evaluar un termino (numeros, variables, etc.)
     private Object evaluarTermino()
     {
         if (coincide(TipoToken.NUMERO))
         {
-            return anterior().literal;  // Devuelve el valor literal del número
+            return anterior().literal;  // Devuelve el valor literal del numero
         }
 
         if (coincide(TipoToken.IDENTIFICADOR))
         {
-            // Aquí podrías agregar la lógica para obtener el valor de una variable
-            return anterior().lexema;  // Simplemente lo devolvemos como ejemplo
+            return anterior().lexema;
         }
 
         if (coincide(TipoToken.PARENTESIS_IZQUIERDO))
@@ -106,10 +100,10 @@ public class Parser
             return valor;
         }
 
-        throw error("Se esperaba un valor o expresión válida.");
+        throw error("Se esperaba un valor o expresión valida.");
     }
 
-    // Método para realizar la operación de suma o resta
+    // Metodo para realizar la operacion de suma o resta
     private Object calcularOperacion(Object izquierda, Token operador, Object derecha)
     {
         if (operador.tipo == TipoToken.MAS)

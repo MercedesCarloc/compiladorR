@@ -23,7 +23,6 @@ public class AnalizadorSintactico
 
     public void analizar()
     {
-        // Inicia el análisis
         while (!estaAlFinal())
         {
             declaracion();
@@ -38,17 +37,16 @@ public class AnalizadorSintactico
             declaracionImprimir();
         } else
         {
-            throw error("Declaración no válida");
+            throw error("Declaración no valida");
         }
     }
 
-    // Analiza una declaración de impresión
     private void declaracionImprimir()
     {
         consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba '(' después de 'imprimir'.");
-        expresion(); // Llama al método para analizar expresiones
-        consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba ')' después de la expresión.");
-        consumir(TipoToken.PUNTO_Y_COMA, "Se esperaba ';' al final de la declaración.");
+        expresion(); // llama al metodo para analizar expresiones
+        consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba ')' después de la expresion.");
+        consumir(TipoToken.PUNTO_Y_COMA, "Se esperaba ';' al final de la declaracion.");
     }
 
     // Analiza expresiones
@@ -74,14 +72,14 @@ public class AnalizadorSintactico
     {
         if (coincide(TipoToken.NUMERO, TipoToken.IDENTIFICADOR))
         {
-            // Si es un número o un identificador, avanza
+            // Si es un número o un identificador avanza
         } else if (coincide(TipoToken.PARENTESIS_IZQUIERDO))
         {
             expresion();
             consumir(TipoToken.PARENTESIS_DERECHO, "Se esperaba ')'.");
         } else
         {
-            throw error("Expresión no válida.");
+            throw error("Expresion invalida.");
         }
     }
 

@@ -27,6 +27,6 @@ public class Token
     @Override
     public String toString()
     {
-        return tipo + " " + lexema + " " + (literal != null ? literal : "") + " [Línea: " + linea + "]";
+        return tipo + " " + lexema + " " + (literal != null ? literal : "") + " [linea: " + linea + "]";
     }
 }
